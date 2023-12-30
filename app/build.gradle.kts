@@ -81,6 +81,8 @@ dependencies {
     val dataStoreVersion = "1.0.0"
     implementation("androidx.datastore:datastore-preferences:$dataStoreVersion")
 
+    implementation("com.github.ismaeldivita:chip-navigation-bar:1.4.0")
+
 
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1")

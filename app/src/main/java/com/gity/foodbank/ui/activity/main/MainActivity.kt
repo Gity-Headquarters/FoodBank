@@ -1,8 +1,9 @@
 package com.gity.foodbank.ui.activity.main
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
+import com.gity.foodbank.R
 import com.gity.foodbank.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -14,11 +15,21 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        for (i in 1..5) {
-            Toast.makeText(this, "Hello World $i", Toast.LENGTH_SHORT).show()
+//        Disable DarkMode
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+
+
+
+        setupBottomNav()
+    }
+
+    private fun setupBottomNav() {
+        binding.bottomNav.setOnItemSelectedListener {
+            when (it) {
+                R.id.bottom_nav_menu_home -> binding.tvWelcom.text = "Welcome"
+                R.id.bottom_nav_menu_explore -> binding.tvWelcom.text = "Explore"
+                R.id.bottom_nav_menu_profile -> binding.tvWelcom.text = "Profile"
+            }
         }
-
-
-
     }
 }
