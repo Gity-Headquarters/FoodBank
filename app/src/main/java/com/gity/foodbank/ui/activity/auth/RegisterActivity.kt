@@ -1,12 +1,16 @@
 package com.gity.foodbank.ui.activity.auth
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.gity.foodbank.R
+import androidx.appcompat.app.AppCompatActivity
+import com.gity.foodbank.databinding.ActivityRegisterBinding
 
 class RegisterActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityRegisterBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_register)
+        binding = ActivityRegisterBinding.inflate(layoutInflater)
+        setContentView(binding.root)
     }
 }

@@ -18,8 +18,6 @@ class MainActivity : AppCompatActivity() {
 //        Disable DarkMode
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
 
-
-
         setupBottomNav()
     }
 
