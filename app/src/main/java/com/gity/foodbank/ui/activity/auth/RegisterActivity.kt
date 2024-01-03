@@ -2,6 +2,8 @@ package com.gity.foodbank.ui.activity.auth
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import androidx.appcompat.app.AppCompatActivity
 import com.gity.foodbank.R
 import com.gity.foodbank.databinding.ActivityRegisterBinding
@@ -31,14 +33,39 @@ class RegisterActivity : AppCompatActivity() {
                 startActivity(Intent(context, LoginActivity::class.java))
                 finish()
             }
+
+//            Text Watcher for auto change text to UpperCase
+            edtFullnameInput.addTextChangedListener(object : TextWatcher {
+                override fun beforeTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    count: Int,
+                    after: Int
+                ) {
+                }
+
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                    edtFullnameInput.removeTextChangedListener(this)
+                    val updatedText = s.toString().uppercase()
+                    edtFullnameInput.setText(updatedText)
+                    edtFullnameInput.setSelection(updatedText.length)
+                    edtFullnameInput.addTextChangedListener(this)
+                }
+
+                override fun afterTextChanged(s: Editable?) {}
+
+            })
+
+
         }
+
     }
 
     private fun register() {
         binding.apply {
             val edtEmail = edtEmailInput.text
             val edtPassword = edtPasswordInput.text
-            val edtFullname = edtFullnameInput.text
+            val edtFullname = edtFullnameInput.text.toString().uppercase()
             val edtNik = edtNikInput.text
 
 //            Check if user contain a number
@@ -64,7 +91,11 @@ class RegisterActivity : AppCompatActivity() {
                     CommonUtils.showToast(context, resources.getString(R.string.empty_all))
                 }
 
-                edtFullname.isNullOrEmpty() -> {
+                edtNik.length <= 15 -> {
+                    CommonUtils.showToast(context, resources.getString(R.string.nik_length_error))
+                }
+
+                edtFullname.isEmpty() -> {
                     CommonUtils.showToast(context, resources.getString(R.string.empty_all))
                 }
 
@@ -72,7 +103,7 @@ class RegisterActivity : AppCompatActivity() {
                     CommonUtils.showToast(context, resources.getString(R.string.email_format_error))
                 }
 
-                numberRegex.containsMatchIn(edtFullname.toString()) -> {
+                numberRegex.containsMatchIn(edtFullname) -> {
                     CommonUtils.showToast(
                         context,
                         resources.getString(R.string.full_names_error_contain_number)
@@ -81,6 +112,7 @@ class RegisterActivity : AppCompatActivity() {
 
                 else -> {
                     onSuccessfulRegister()
+                    CommonUtils.showToast(context, "UpperCase Name : $edtFullname")
                 }
 
             }

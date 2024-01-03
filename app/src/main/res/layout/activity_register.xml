@@ -38,14 +38,15 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/edt_nik_layout"
                 android:layout_width="0dp"
-                android:layout_height="64dp"
+                android:layout_height="wrap_content"
                 app:boxCornerRadiusBottomEnd="8dp"
                 app:boxCornerRadiusBottomStart="8dp"
                 app:boxCornerRadiusTopEnd="8dp"
                 app:boxCornerRadiusTopStart="8dp"
                 app:counterEnabled="true"
-                app:counterMaxLength="16"
                 app:counterTextColor="@color/dark_orange"
+                app:helperText="Required"
+                app:helperTextTextColor="@color/dark_orange"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -66,13 +67,15 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/edt_fullname_layout"
                 android:layout_width="0dp"
-                android:layout_height="64dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 app:boxCornerRadiusBottomEnd="8dp"
                 app:boxCornerRadiusBottomStart="8dp"
                 app:boxCornerRadiusTopEnd="8dp"
                 app:boxCornerRadiusTopStart="8dp"
                 app:counterTextColor="@color/dark_orange"
+                app:helperText="Fullname in KTP"
+                app:helperTextTextColor="@color/dark_orange"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/edt_nik_layout">
@@ -80,7 +83,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edt_fullname_input"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:fontFamily="@font/inter_reguler"
                     android:hint="Fullname"
                     android:inputType="text"
@@ -93,7 +96,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/edt_email_layout"
                 android:layout_width="0dp"
-                android:layout_height="64dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 app:boxCornerRadiusBottomEnd="8dp"
                 app:boxCornerRadiusBottomStart="8dp"
@@ -106,7 +109,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edt_email_input"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:fontFamily="@font/inter_reguler"
                     android:hint="Email"
                     android:textSize="14sp" />
@@ -117,7 +120,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/edt_password_layout"
                 android:layout_width="0dp"
-                android:layout_height="64dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 app:boxCornerRadiusBottomEnd="8dp"
                 app:boxCornerRadiusBottomStart="8dp"
@@ -131,7 +134,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edt_password_input"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:fontFamily="@font/inter_reguler"
                     android:hint="Password"
                     android:inputType="textPassword"
