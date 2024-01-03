@@ -5,4 +5,15 @@
     <string name="bottom_nav_menu_home">Home</string>
     <string name="bottom_nav_menu_explore">Explore</string>
     <string name="bottom_nav_menu_profile">Profile</string>
+
+    <!-- Authentication Massage -->
+    <string name="email_format_error">Please enter a valid email address. Email addresses must be in the format example@gmail.com</string>
+    <string name="password_length_error">The password must be at least 6 characters</string>
+    <string name="empty_email_and_password">Please enter your email address and password</string>
+    <string name="empty_all">Please enter your all information</string>
+    <string name="nik_length_error">NIK must be 16 characters</string>
+    <string name="full_names_error_contain_number">Your full names contain Number, full names must be Alphabet</string>
+    <string name="successful_register">Thanks for creating your account in here, please login</string>
+    <string name="failed_register">Failed creating your account or Account is already exist</string>
+
 </resources>
