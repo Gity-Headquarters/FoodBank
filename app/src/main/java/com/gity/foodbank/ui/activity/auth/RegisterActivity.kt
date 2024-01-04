@@ -63,20 +63,20 @@ class RegisterActivity : AppCompatActivity() {
 
     private fun register() {
         binding.apply {
-            val edtEmail = edtEmailInput.text
-            val edtPassword = edtPasswordInput.text
+            val edtEmail = edtEmailInput.text.toString()
+            val edtPassword = edtPasswordInput.text.toString()
             val edtFullname = edtFullnameInput.text.toString().uppercase()
-            val edtNik = edtNikInput.text
+            val edtNik = edtNikInput.text.toString()
 
 //            Check if user contain a number
             val numberRegex = Regex("\\d")
 
             when {
-                edtEmail.isNullOrEmpty() -> {
+                edtEmail.isEmpty() -> {
                     CommonUtils.showToast(context, resources.getString(R.string.empty_all))
                 }
 
-                edtPassword.isNullOrEmpty() -> {
+                edtPassword.isEmpty() -> {
                     CommonUtils.showToast(context, resources.getString(R.string.empty_all))
                 }
 
@@ -87,13 +87,13 @@ class RegisterActivity : AppCompatActivity() {
                     )
                 }
 
-                edtNik.isNullOrEmpty() -> {
-                    CommonUtils.showToast(context, resources.getString(R.string.empty_all))
-                }
-
-                edtNik.length <= 15 -> {
-                    CommonUtils.showToast(context, resources.getString(R.string.nik_length_error))
-                }
+//                edtNik.isEmpty() -> {
+//                    CommonUtils.showToast(context, resources.getString(R.string.empty_all))
+//                }
+//
+//                edtNik.length <= 15 -> {
+//                    CommonUtils.showToast(context, resources.getString(R.string.nik_length_error))
+//                }
 
                 edtFullname.isEmpty() -> {
                     CommonUtils.showToast(context, resources.getString(R.string.empty_all))

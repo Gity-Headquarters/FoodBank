@@ -2,22 +2,30 @@ package com.gity.foodbank.ui.activity.auth
 
 import android.content.Intent
 import android.os.Bundle
-import android.text.Editable
-import android.util.Patterns
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.gity.foodbank.R
 import com.gity.foodbank.databinding.ActivityLoginBinding
+import com.gity.foodbank.di.Injection
 import com.gity.foodbank.ui.activity.main.MainActivity
 import com.gity.foodbank.utils.CommonUtils
+import kotlinx.coroutines.launch
 
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
+    private lateinit var viewModel: LoginViewModel
     private var context = this@LoginActivity
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val injection = Injection.provideRepository()
+        val factory = ViewModelFactory(injection)
+        viewModel = ViewModelProvider(context, factory)[LoginViewModel::class.java]
+
 
         binding.apply {
             navigationToRegister.setOnClickListener {
@@ -40,12 +48,16 @@ class LoginActivity : AppCompatActivity() {
 
     private fun login() {
         binding.apply {
-            val edtEmail = edtEmailInput.text
-            val edtPassword = edtPasswordInput.text
+            val edtEmail = edtEmailInput.text.toString().trim()
+            val edtPassword = edtPasswordInput.text.toString().trim()
+
 
             when {
-                edtEmail.isNullOrEmpty() || edtPassword.isNullOrEmpty() -> {
-                    CommonUtils.showToast(context, resources.getString(R.string.empty_email_and_password))
+                edtEmail.isEmpty() || edtPassword.isEmpty() -> {
+                    CommonUtils.showToast(
+                        context,
+                        resources.getString(R.string.empty_email_and_password)
+                    )
                 }
 
                 !CommonUtils.isValidEmail(edtEmail) -> {
@@ -53,11 +65,30 @@ class LoginActivity : AppCompatActivity() {
                 }
 
                 edtPassword.length <= 6 -> {
-                    CommonUtils.showToast(context, resources.getString(R.string.password_length_error))
+                    CommonUtils.showToast(
+                        context,
+                        resources.getString(R.string.password_length_error)
+                    )
                 }
 
                 else -> {
-                    onSuccessfulLogin()
+                    lifecycleScope.launch {
+                        viewModel.login(edtEmail, edtPassword)
+                        viewModel.loginResult.observe(context) {
+                            it?.let {
+                                if (it.meta?.status == "success") {
+                                    // Jika login berhasil, tampilkan token
+                                    val token = it.data?.token
+                                    CommonUtils.showToast(context, "Login success. Token: $token")
+                                } else {
+                                    // Jika login gagal, tampilkan pesan kesalahan
+                                    val message = it.meta?.message ?: "Login failed"
+                                    CommonUtils.showToast(context, message)
+                                }
+                            }
+                        }
+                        onSuccessfulLogin()
+                    }
                 }
             }
         }
