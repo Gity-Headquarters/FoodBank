@@ -1,4 +1,4 @@
-package com.gity.foodbank.ui.activity.auth
+package com.gity.foodbank.ui.activity.login
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,7 +8,9 @@ import androidx.lifecycle.lifecycleScope
 import com.gity.foodbank.R
 import com.gity.foodbank.databinding.ActivityLoginBinding
 import com.gity.foodbank.di.Injection
+import com.gity.foodbank.factory.ViewModelFactory
 import com.gity.foodbank.ui.activity.main.MainActivity
+import com.gity.foodbank.ui.activity.register.RegisterActivity
 import com.gity.foodbank.utils.CommonUtils
 import kotlinx.coroutines.launch
 
@@ -73,21 +75,14 @@ class LoginActivity : AppCompatActivity() {
 
                 else -> {
                     lifecycleScope.launch {
-                        viewModel.login(edtEmail, edtPassword)
-                        viewModel.loginResult.observe(context) {
-                            it?.let {
-                                if (it.meta?.status == "success") {
-                                    // Jika login berhasil, tampilkan token
-                                    val token = it.data?.token
-                                    CommonUtils.showToast(context, "Login success. Token: $token")
-                                } else {
-                                    // Jika login gagal, tampilkan pesan kesalahan
-                                    val message = it.meta?.message ?: "Login failed"
-                                    CommonUtils.showToast(context, message)
-                                }
-                            }
+                        try {
+                            val response = viewModel.login(edtEmail, edtPassword)
+                            val token = response.body()?.loginResult?.token
+                            CommonUtils.showToast(context, "My Token : $token")
+                            onSuccessfulLogin()
+                        } catch (e: Exception) {
+                            onFailedLogin()
                         }
-                        onSuccessfulLogin()
                     }
                 }
             }
@@ -97,5 +92,9 @@ class LoginActivity : AppCompatActivity() {
     private fun onSuccessfulLogin() {
         startActivity(Intent(this@LoginActivity, MainActivity::class.java))
         finish()
+    }
+
+    private fun onFailedLogin() {
+        CommonUtils.showToast(context, "Login Failed, Password or Email is Wrong")
     }
 }

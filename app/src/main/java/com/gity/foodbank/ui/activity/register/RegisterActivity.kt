@@ -1,23 +1,34 @@
-package com.gity.foodbank.ui.activity.auth
+package com.gity.foodbank.ui.activity.register
 
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.gity.foodbank.R
 import com.gity.foodbank.databinding.ActivityRegisterBinding
+import com.gity.foodbank.di.Injection
+import com.gity.foodbank.factory.ViewModelFactory
+import com.gity.foodbank.ui.activity.login.LoginActivity
 import com.gity.foodbank.utils.CommonUtils
+import kotlinx.coroutines.launch
 
 class RegisterActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityRegisterBinding
+    private lateinit var viewModel: RegisterViewModel
     private val context = this@RegisterActivity
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val injection = Injection.provideRepository()
+        val factory = ViewModelFactory(injection)
+        viewModel = ViewModelProvider(context, factory)[RegisterViewModel::class.java]
 
         binding.apply {
             navigationToLogin.setOnClickListener {
@@ -111,8 +122,16 @@ class RegisterActivity : AppCompatActivity() {
                 }
 
                 else -> {
-                    onSuccessfulRegister()
-                    CommonUtils.showToast(context, "UpperCase Name : $edtFullname")
+                    lifecycleScope.launch {
+                        try {
+                            viewModel.register(edtFullname, edtEmail, edtPassword)
+                            onSuccessfulRegister()
+                            startActivity(Intent(context, LoginActivity::class.java))
+                            finish()
+                        } catch (e: Exception) {
+                            onFailedRegister()
+                        }
+                    }
                 }
 
             }
@@ -122,6 +141,10 @@ class RegisterActivity : AppCompatActivity() {
 
     private fun onSuccessfulRegister() {
         CommonUtils.showToast(context, resources.getString(R.string.successful_register))
+    }
+
+    private fun onFailedRegister() {
+        CommonUtils.showToast(context, "Login Failed, Account is Already exist or Server is error")
     }
 
 

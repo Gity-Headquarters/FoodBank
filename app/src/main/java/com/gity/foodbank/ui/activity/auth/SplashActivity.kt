@@ -6,6 +6,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.gity.foodbank.databinding.ActivitySplashBinding
+import com.gity.foodbank.ui.activity.login.LoginActivity
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 

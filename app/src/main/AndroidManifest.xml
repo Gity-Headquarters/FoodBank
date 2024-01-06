@@ -27,10 +27,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.activity.auth.RegisterActivity"
+            android:name=".ui.activity.register.RegisterActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.auth.LoginActivity"
+            android:name=".ui.activity.login.LoginActivity"
             android:exported="false" />
         <activity
             android:name=".ui.activity.main.MainActivity"
