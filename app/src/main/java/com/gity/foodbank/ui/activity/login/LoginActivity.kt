@@ -6,12 +6,15 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.gity.foodbank.R
+import com.gity.foodbank.data.preferences.datastore.DataStore
+import com.gity.foodbank.data.preferences.datastore.dataStore
 import com.gity.foodbank.databinding.ActivityLoginBinding
 import com.gity.foodbank.di.Injection
 import com.gity.foodbank.factory.ViewModelFactory
 import com.gity.foodbank.ui.activity.main.MainActivity
 import com.gity.foodbank.ui.activity.register.RegisterActivity
 import com.gity.foodbank.utils.CommonUtils
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class LoginActivity : AppCompatActivity() {
@@ -42,6 +45,14 @@ class LoginActivity : AppCompatActivity() {
 
             btnLogin.setOnClickListener {
                 login()
+            }
+
+            imageView.setOnClickListener {
+                showLoading(true)
+                lifecycleScope.launch {
+                    delay(3000)
+                    showLoading(false)
+                }
             }
         }
 
@@ -76,11 +87,20 @@ class LoginActivity : AppCompatActivity() {
                 else -> {
                     lifecycleScope.launch {
                         try {
+                            showLoading(true)
                             val response = viewModel.login(edtEmail, edtPassword)
                             val token = response.body()?.loginResult?.token
-                            CommonUtils.showToast(context, "My Token : $token")
+                            lifecycleScope.launch {
+                                if (token != null) {
+                                    saveToken(token)
+                                } else {
+                                    CommonUtils.showToast(context, "Token is Null")
+                                }
+                            }
                             onSuccessfulLogin()
+                            showLoading(false)
                         } catch (e: Exception) {
+                            showLoading(false)
                             onFailedLogin()
                         }
                     }
@@ -96,5 +116,14 @@ class LoginActivity : AppCompatActivity() {
 
     private fun onFailedLogin() {
         CommonUtils.showToast(context, "Login Failed, Password or Email is Wrong")
+    }
+
+    private fun showLoading(state: Boolean) {
+        CommonUtils.loading(binding.loading, state)
+    }
+
+    private suspend fun saveToken(token: String) {
+        val dataStore = DataStore.getInstance(context.dataStore)
+        dataStore.saveToken(token)
     }
 }

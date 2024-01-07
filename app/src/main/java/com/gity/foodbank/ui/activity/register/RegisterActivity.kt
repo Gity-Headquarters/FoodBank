@@ -13,6 +13,7 @@ import com.gity.foodbank.di.Injection
 import com.gity.foodbank.factory.ViewModelFactory
 import com.gity.foodbank.ui.activity.login.LoginActivity
 import com.gity.foodbank.utils.CommonUtils
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class RegisterActivity : AppCompatActivity() {
@@ -30,6 +31,7 @@ class RegisterActivity : AppCompatActivity() {
         val factory = ViewModelFactory(injection)
         viewModel = ViewModelProvider(context, factory)[RegisterViewModel::class.java]
 
+
         binding.apply {
             navigationToLogin.setOnClickListener {
                 startActivity(Intent(this@RegisterActivity, LoginActivity::class.java))
@@ -43,6 +45,16 @@ class RegisterActivity : AppCompatActivity() {
             btnLogin.setOnClickListener {
                 startActivity(Intent(context, LoginActivity::class.java))
                 finish()
+            }
+
+
+
+            imageView.setOnClickListener {
+                showLoading(true)
+                lifecycleScope.launch {
+                    delay(3000)
+                    showLoading(false)
+                }
             }
 
 //            Text Watcher for auto change text to UpperCase
@@ -64,7 +76,6 @@ class RegisterActivity : AppCompatActivity() {
                 }
 
                 override fun afterTextChanged(s: Editable?) {}
-
             })
 
 
@@ -76,7 +87,7 @@ class RegisterActivity : AppCompatActivity() {
         binding.apply {
             val edtEmail = edtEmailInput.text.toString()
             val edtPassword = edtPasswordInput.text.toString()
-            val edtFullname = edtFullnameInput.text.toString().uppercase()
+            val edtFullname = edtFullnameInput.text.toString()
             val edtNik = edtNikInput.text.toString()
 
 //            Check if user contain a number
@@ -124,11 +135,14 @@ class RegisterActivity : AppCompatActivity() {
                 else -> {
                     lifecycleScope.launch {
                         try {
+                            showLoading(true)
                             viewModel.register(edtFullname, edtEmail, edtPassword)
                             onSuccessfulRegister()
                             startActivity(Intent(context, LoginActivity::class.java))
                             finish()
+                            showLoading(false)
                         } catch (e: Exception) {
+                            showLoading(false)
                             onFailedRegister()
                         }
                     }
@@ -144,8 +158,28 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun onFailedRegister() {
-        CommonUtils.showToast(context, "Login Failed, Account is Already exist or Server is error")
+        CommonUtils.showToast(
+            context,
+            "Register Failed, Account is Already exist or Server is error"
+        )
     }
+
+    private fun showLoading(state: Boolean) {
+        CommonUtils.loading(binding.loading, state)
+    }
+
+//    private fun showBlur() {
+//        Blurry.with(context)
+//            .radius(10)
+//            .sampling(8)
+//            .async()
+//            .animate(500)
+//            .onto(binding.root)
+//    }
+//
+//    private fun hideBlur() {
+//        Blurry.delete(binding.root)
+//    }
 
 
 }

@@ -2,6 +2,7 @@ package com.gity.foodbank.ui.activity.login
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.gity.foodbank.data.model.LoginResponse
 import com.gity.foodbank.data.model.LoginResponseDicoding
 import com.gity.foodbank.data.model.LoginResponseDicodingResult
 import com.gity.foodbank.repository.Repository

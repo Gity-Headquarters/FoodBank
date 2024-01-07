@@ -90,6 +90,13 @@ dependencies {
     implementation("com.airbnb.android:lottie:$lottieVersion")
 
 
+    //    Blurry Activity
+    val blurryVersion = "4.0.0"
+    implementation("jp.wasabeef:blurry:$blurryVersion")
+
+
+
+
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.11.0")

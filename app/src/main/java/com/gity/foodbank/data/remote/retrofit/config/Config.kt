@@ -11,7 +11,9 @@ class Config {
     companion object {
 
         const val BASE_URL_DICODING = "https://story-api.dicoding.dev/v1/"
-        const val BASE_URL_FOODBANK = "https://4009-103-105-34-98.ngrok-free.app/api/v1/auth/"
+        const val BASE_URL_FOODBANK = "https://61e7-103-105-34-73.ngrok-free.app/api/v1/auth/"
+        const val BASE_URL_FOODBANK2 = "https://6de9-103-105-33-73.ngrok-free.app/api/v1/auth/"
+        const val BASE_URL_FOODBANKTANAHKU = "https://6d2c-103-105-34-73.ngrok-free.app/auth/"
 
         fun getApiService(): Service {
             val httpLoggingInterceptor1 = HttpLoggingInterceptor()

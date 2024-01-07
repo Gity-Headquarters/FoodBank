@@ -6,10 +6,9 @@
 
         <item name="colorPrimary">@color/dark_orange</item>
         <item name="colorPrimaryVariant">@color/light_orange</item>
-
         <item name="colorSecondary">@color/light_green</item>
         <item name="colorSecondaryVariant">@color/dark_green</item>
-
+        <item name="android:windowLightStatusBar">true</item>
         <item name="backgroundColor">@color/white</item>
     </style>
 

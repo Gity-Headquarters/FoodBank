@@ -1,7 +1,9 @@
 package com.gity.foodbank.repository
 
 
+import com.gity.foodbank.data.model.LoginResponse
 import com.gity.foodbank.data.model.LoginResponseDicoding
+import com.gity.foodbank.data.model.RegisterResponse
 import com.gity.foodbank.data.model.RegisterResponseDicoding
 import com.gity.foodbank.data.remote.retrofit.service.Service
 import retrofit2.Response
@@ -24,8 +26,8 @@ class Repository(private val apiService: Service) {
     suspend fun registerAuth(
         name: String,
         email: String,
-        password: String
-    ): Response<RegisterResponseDicoding> {
+        password: String,
+    ): Response<RegisterResponse> {
         return try {
             val response = apiService.postRegister(name, email, password)
             if (response.isSuccessful) {
