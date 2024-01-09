@@ -7,12 +7,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.gity.foodbank.R
+import com.gity.foodbank.ui.fragment.home.HomeFragment
 
 class DonateFragment : Fragment() {
-
-    companion object {
-        fun newInstance() = DonateFragment()
-    }
 
     private lateinit var viewModel: DonateViewModel
 
@@ -27,6 +24,15 @@ class DonateFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(DonateViewModel::class.java)
         // TODO: Use the ViewModel
+    }
+
+    companion object {
+        fun newInstance(): DonateFragment {
+            val fragment = DonateFragment()
+            val args = Bundle()
+            fragment.arguments = args
+            return fragment
+        }
     }
 
 }

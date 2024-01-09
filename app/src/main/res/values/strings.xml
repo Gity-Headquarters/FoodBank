@@ -3,7 +3,7 @@
 
     <!-- Bottom Navigation Menu -->
     <string name="bottom_nav_menu_home">Home</string>
-    <string name="bottom_nav_menu_explore">Explore</string>
+    <string name="bottom_nav_menu_explore">Donation</string>
     <string name="bottom_nav_menu_profile">Profile</string>
 
     <!-- Authentication Massage -->

@@ -10,10 +10,6 @@ import com.gity.foodbank.R
 
 class HomeFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = HomeFragment()
-    }
-
     private lateinit var viewModel: HomeViewModel
 
     override fun onCreateView(
@@ -27,6 +23,15 @@ class HomeFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
         // TODO: Use the ViewModel
+    }
+
+    companion object {
+        fun newInstance(): HomeFragment {
+            val fragment = HomeFragment()
+            val args = Bundle()
+            fragment.arguments = args
+            return fragment
+        }
     }
 
 }

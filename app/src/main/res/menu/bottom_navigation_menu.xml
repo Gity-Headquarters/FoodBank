@@ -9,8 +9,8 @@
         app:cnb_iconColor="#FF7F0A" />
 
     <item
-        android:id="@+id/bottom_nav_menu_explore"
-        android:icon="@drawable/ic_explore"
+        android:id="@+id/bottom_nav_menu_donate"
+        android:icon="@drawable/ic_donation"
         android:title="@string/bottom_nav_menu_explore"
         app:cnb_iconColor="#FF7F0A" />
 
