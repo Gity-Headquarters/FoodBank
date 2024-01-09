@@ -12,7 +12,7 @@ import com.gity.foodbank.databinding.ActivityRegisterBinding
 import com.gity.foodbank.di.Injection
 import com.gity.foodbank.factory.ViewModelFactory
 import com.gity.foodbank.ui.activity.login.LoginActivity
-import com.gity.foodbank.utils.CommonUtils
+import com.gity.foodbank.utils.Common
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -95,38 +95,38 @@ class RegisterActivity : AppCompatActivity() {
 
             when {
                 edtEmail.isEmpty() -> {
-                    CommonUtils.showToast(context, resources.getString(R.string.empty_all))
+                    Common.showToast(context, resources.getString(R.string.empty_all))
                 }
 
                 edtPassword.isEmpty() -> {
-                    CommonUtils.showToast(context, resources.getString(R.string.empty_all))
+                    Common.showToast(context, resources.getString(R.string.empty_all))
                 }
 
                 edtPassword.length <= 6 -> {
-                    CommonUtils.showToast(
+                    Common.showToast(
                         context,
                         resources.getString(R.string.password_length_error)
                     )
                 }
 
 //                edtNik.isEmpty() -> {
-//                    CommonUtils.showToast(context, resources.getString(R.string.empty_all))
+//                    Common.showToast(context, resources.getString(R.string.empty_all))
 //                }
 //
 //                edtNik.length <= 15 -> {
-//                    CommonUtils.showToast(context, resources.getString(R.string.nik_length_error))
+//                    Common.showToast(context, resources.getString(R.string.nik_length_error))
 //                }
 
                 edtFullname.isEmpty() -> {
-                    CommonUtils.showToast(context, resources.getString(R.string.empty_all))
+                    Common.showToast(context, resources.getString(R.string.empty_all))
                 }
 
-                !CommonUtils.isValidEmail(edtEmail) -> {
-                    CommonUtils.showToast(context, resources.getString(R.string.email_format_error))
+                !Common.isValidEmail(edtEmail) -> {
+                    Common.showToast(context, resources.getString(R.string.email_format_error))
                 }
 
                 numberRegex.containsMatchIn(edtFullname) -> {
-                    CommonUtils.showToast(
+                    Common.showToast(
                         context,
                         resources.getString(R.string.full_names_error_contain_number)
                     )
@@ -154,18 +154,18 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun onSuccessfulRegister() {
-        CommonUtils.showToast(context, resources.getString(R.string.successful_register))
+        Common.showToast(context, resources.getString(R.string.successful_register))
     }
 
     private fun onFailedRegister() {
-        CommonUtils.showToast(
+        Common.showToast(
             context,
             "Register Failed, Account is Already exist or Server is error"
         )
     }
 
     private fun showLoading(state: Boolean) {
-        CommonUtils.loading(binding.loading, state)
+        Common.loading(binding.loading, state)
     }
 
 //    private fun showBlur() {

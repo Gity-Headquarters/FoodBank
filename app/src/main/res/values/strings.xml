@@ -16,4 +16,45 @@
     <string name="successful_register">Thanks for creating your account in here, please login</string>
     <string name="failed_register">Failed creating your account or Account is already exist</string>
 
+    <!--  Mockup List Item Booth  -->
+    <string-array name="list_item_booth_title">
+
+        <item>Mandiri Booth</item>
+        <item>Pesantren Booth</item>
+        <item>Kampus Booth</item>
+        <item>Bem Booth</item>
+        <item>Food Bank Booth</item>
+
+    </string-array>
+
+    <string-array name="list_item_booth_food">
+
+        <item>593 Foods</item>
+        <item>100 Foods</item>
+        <item>267 Foods</item>
+        <item>200 Foods</item>
+        <item>492 Foods</item>
+
+    </string-array>
+
+    <string-array name="list_item_booth_location">
+
+        <item>Dago, Bandung</item>
+        <item>Cipatat, Bandung Barat</item>
+        <item>Cianjur Kota, Cianjur</item>
+        <item>Barcelona, Spanyol</item>
+        <item>Wano, One Piece World</item>
+
+    </string-array>
+
+    <string-array name="list_item_booth_time">
+
+        <item>12:00 PM</item>
+        <item>9:00 AM</item>
+        <item>8:00 AM</item>
+        <item>7:00 PM</item>
+        <item>4:00 PM</item>
+
+    </string-array>
+
 </resources>

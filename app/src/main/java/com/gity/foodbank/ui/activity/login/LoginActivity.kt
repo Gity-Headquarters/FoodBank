@@ -13,7 +13,7 @@ import com.gity.foodbank.di.Injection
 import com.gity.foodbank.factory.ViewModelFactory
 import com.gity.foodbank.ui.activity.main.MainActivity
 import com.gity.foodbank.ui.activity.register.RegisterActivity
-import com.gity.foodbank.utils.CommonUtils
+import com.gity.foodbank.utils.Common
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -67,18 +67,18 @@ class LoginActivity : AppCompatActivity() {
 
             when {
                 edtEmail.isEmpty() || edtPassword.isEmpty() -> {
-                    CommonUtils.showToast(
+                    Common.showToast(
                         context,
                         resources.getString(R.string.empty_email_and_password)
                     )
                 }
 
-                !CommonUtils.isValidEmail(edtEmail) -> {
-                    CommonUtils.showToast(context, resources.getString(R.string.email_format_error))
+                !Common.isValidEmail(edtEmail) -> {
+                    Common.showToast(context, resources.getString(R.string.email_format_error))
                 }
 
                 edtPassword.length <= 6 -> {
-                    CommonUtils.showToast(
+                    Common.showToast(
                         context,
                         resources.getString(R.string.password_length_error)
                     )
@@ -94,7 +94,7 @@ class LoginActivity : AppCompatActivity() {
                                 if (token != null) {
                                     saveToken(token)
                                 } else {
-                                    CommonUtils.showToast(context, "Token is Null")
+                                    Common.showToast(context, "Token is Null")
                                 }
                             }
                             onSuccessfulLogin()
@@ -115,11 +115,11 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun onFailedLogin() {
-        CommonUtils.showToast(context, "Login Failed, Password or Email is Wrong")
+        Common.showToast(context, "Login Failed, Password or Email is Wrong")
     }
 
     private fun showLoading(state: Boolean) {
-        CommonUtils.loading(binding.loading, state)
+        Common.loading(binding.loading, state)
     }
 
     private suspend fun saveToken(token: String) {

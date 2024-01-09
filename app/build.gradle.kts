@@ -3,6 +3,9 @@ plugins {
     id("org.jetbrains.kotlin.android")
 
     id("kotlin-parcelize")
+
+//    Firebase
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -93,6 +96,10 @@ dependencies {
     //    Blurry Activity
     val blurryVersion = "4.0.0"
     implementation("jp.wasabeef:blurry:$blurryVersion")
+
+    //    Firebase
+    implementation(platform("com.google.firebase:firebase-bom:32.7.0"))
+    implementation("com.google.firebase:firebase-analytics")
 
 
 

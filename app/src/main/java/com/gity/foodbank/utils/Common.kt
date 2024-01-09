@@ -1,12 +1,11 @@
 package com.gity.foodbank.utils
 
 import android.content.Context
-import android.text.Editable
 import android.util.Patterns
 import android.view.View
 import android.widget.Toast
 
-object CommonUtils {
+object Common {
 
 //    Setting Loading
     fun loading(view: View, state: Boolean) {
