@@ -1,4 +1,4 @@
-package com.gity.foodbank.ui.activity.auth
+package com.gity.foodbank.ui.activity.session
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

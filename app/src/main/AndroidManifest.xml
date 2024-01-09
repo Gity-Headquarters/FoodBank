@@ -15,10 +15,10 @@
         android:theme="@style/Theme.FoodBank"
         tools:targetApi="31">
         <activity
-            android:name=".ui.activity.auth.OnBoardingActivity"
+            android:name=".ui.activity.session.OnBoardingActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.auth.SplashActivity"
+            android:name=".ui.activity.session.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

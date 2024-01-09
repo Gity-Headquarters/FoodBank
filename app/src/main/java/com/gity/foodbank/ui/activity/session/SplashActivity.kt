@@ -1,4 +1,4 @@
-package com.gity.foodbank.ui.activity.auth
+package com.gity.foodbank.ui.activity.session
 
 import android.annotation.SuppressLint
 import android.content.Intent
