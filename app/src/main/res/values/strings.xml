@@ -57,4 +57,34 @@
 
     </string-array>
 
+    <!--  Donation About  -->
+    <string name="donation_about_title">About</string>
+    <string name="donation_about_description">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</string>
+
+    <!--  Donation Participants -->
+    <string name="donation_participant_title">Participants</string>
+    <string name="donation_participant_seeall">see all</string>
+
+    <!--  Donation Other Donations -->
+    <string name="donation_other_donations_title">Other donations</string>
+
+    <!--  Mockup List Item Other Donations  -->
+    <string-array name="list_item_other_donations_title">
+
+        <item>Zero Hunger Programme</item>
+        <item>Waduh Donations</item>
+        <item>Donations from Bem</item>
+        <item>Google Donations</item>
+        <item>Let"'"s Eat</item>
+
+    </string-array>
+
+    <string-array name="list_item_other_donations_description">
+
+        <item>Ini buat deksripsi</item>
+        <item>Bentar bingung</item>
+        <item>Pegel cok</item>
+        <item>Tapi rame</item>
+        <item>Maap jelek</item>
+    </string-array>
 </resources>

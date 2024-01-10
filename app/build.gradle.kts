@@ -101,6 +101,10 @@ dependencies {
     implementation(platform("com.google.firebase:firebase-bom:32.7.0"))
     implementation("com.google.firebase:firebase-analytics")
 
+    //    Rounded Image
+    val roundedImageVersion = "2.3.0"
+    implementation("com.makeramen:roundedimageview:$roundedImageVersion")
+
 
 
 

@@ -1,21 +1,266 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
     android:backgroundTint="@color/white"
     tools:context=".ui.fragment.donate.DonateFragment">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello this is Donation Fragment"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:backgroundTint="@color/white"
+        tools:context=".ui.fragment.donate.DonateFragment">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <!-- Donation Title & Description -->
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintStart_toStartOf="@+id/start16dp"
+            app:layout_constraintTop_toTopOf="@+id/top32dp">
+
+
+            <TextView
+                android:id="@+id/tv_donation_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inter_bold"
+                android:text="Lorem Ipsum is simply dummy \ntext of the printing."
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/tv_donation_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inter_medium"
+                android:text="Lorem Ipsum"
+                android:textColor="#797979"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+
+        <!-- Donation Image -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/materialCardView"
+            android:layout_width="0dp"
+            android:layout_height="200dp"
+            android:layout_marginTop="32dp"
+            android:elevation="16dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="8dp"
+            app:layout_constraintEnd_toStartOf="@+id/end16dp"
+            app:layout_constraintStart_toStartOf="@+id/start16dp"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+            <ImageView
+                android:id="@+id/iv_donation_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/foodbank3" />
+
+        </com.google.android.material.card.MaterialCardView>
+
+
+        <!-- Donation About -->
+        <LinearLayout
+            android:id="@+id/linearLayout3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toStartOf="@+id/end16dp"
+            app:layout_constraintStart_toStartOf="@+id/start16dp"
+            app:layout_constraintTop_toBottomOf="@+id/materialCardView">
+
+            <TextView
+                android:id="@+id/tv_donation_about_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inter_semibold"
+                android:text="@string/donation_about_title"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/tv_donation_about_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/inter_reguler"
+                android:text="@string/donation_about_description"
+                android:textColor="#797979"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+
+        <!-- Donation Participants -->
+        <LinearLayout
+            android:id="@+id/linearLayout5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toStartOf="@+id/end16dp"
+            app:layout_constraintStart_toStartOf="@+id/start16dp"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
+
+            <!--  Particpants Title  -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_donation_participant_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/inter_semibold"
+                    android:text="@string/donation_participant_title"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_donation_participant_seeall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/inter_medium"
+                    android:text="@string/donation_participant_seeall"
+                    android:textColor="@color/dark_orange"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!--  Particpants Photo User  -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp">
+
+                <com.makeramen.roundedimageview.RoundedImageView
+                    android:id="@+id/iv_user_participant1"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_marginEnd="-20dp"
+                    android:src="@drawable/user_participant1"
+                    app:riv_border_color="@color/white"
+                    app:riv_border_width="2dp"
+                    app:riv_corner_radius="100dp" />
+
+                <com.makeramen.roundedimageview.RoundedImageView
+                    android:id="@+id/iv_user_participant2"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_marginEnd="-20dp"
+                    android:src="@drawable/user_participant2"
+                    app:riv_border_color="@color/white"
+                    app:riv_border_width="2dp"
+                    app:riv_corner_radius="100dp" />
+
+                <com.makeramen.roundedimageview.RoundedImageView
+                    android:id="@+id/iv_user_participant3"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_marginEnd="-20dp"
+                    android:src="@drawable/user_participant3"
+                    app:riv_border_color="@color/white"
+                    app:riv_border_width="2dp"
+                    app:riv_corner_radius="100dp" />
+
+                <com.makeramen.roundedimageview.RoundedImageView
+                    android:id="@+id/iv_user_participant4"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_marginEnd="-20dp"
+                    android:src="@drawable/user_participant4"
+                    app:riv_border_color="@color/white"
+                    app:riv_border_width="2dp"
+                    app:riv_corner_radius="100dp" />
+
+                <com.makeramen.roundedimageview.RoundedImageView
+                    android:id="@+id/iv_user_participant5"
+                    android:layout_width="48dp"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/user_participant5"
+                    app:riv_border_color="@color/white"
+                    app:riv_border_width="2dp"
+                    app:riv_corner_radius="100dp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Button Donate -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/materialButton"
+            android:layout_width="0dp"
+            android:layout_height="54dp"
+            android:layout_marginTop="32dp"
+            android:fontFamily="@font/inter_bold"
+            android:text="Donate"
+            android:textSize="14sp"
+            app:cornerRadius="8dp"
+            app:layout_constraintEnd_toStartOf="@+id/end16dp"
+            app:layout_constraintStart_toStartOf="@+id/start16dp"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout5" />
+
+        <TextView
+            android:id="@+id/tv_donation_other_donation_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:fontFamily="@font/inter_semibold"
+            android:text="@string/donation_other_donations_title"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="@+id/start16dp"
+            app:layout_constraintTop_toBottomOf="@+id/materialButton" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_list_item_other_donations"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_donation_other_donation_title"
+            tools:itemCount="1"
+            tools:listitem="@layout/list_item_other_donations" />
+
+
+        <!-- Margin Top 32dp -->
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/top32dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="32dp" />
+
+        <!-- Marigin Start 16dp -->
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/start16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="16dp" />
+
+        <!-- Marigin End 16dp -->
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/end16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="16dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.core.widget.NestedScrollView>
+
