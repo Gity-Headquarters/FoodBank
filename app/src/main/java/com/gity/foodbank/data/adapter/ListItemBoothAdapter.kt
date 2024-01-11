@@ -1,57 +1,61 @@
 package com.gity.foodbank.data.adapter
 
+import android.annotation.SuppressLint
+import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView.OnItemClickListener
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.gity.foodbank.R
-import com.gity.foodbank.data.model.ListItemBooth
+import com.gity.foodbank.data.model.DataItem
+import com.gity.foodbank.databinding.ListItemBoothBinding
 
-class ListItemBoothAdapter(private val listItem: List<ListItemBooth>, private val itemClickListener: ItemClickListener) :
-    RecyclerView.Adapter<ListItemBoothAdapter.ItemAdapter>() {
+class ListItemBoothAdapter : RecyclerView.Adapter<ListItemBoothAdapter.BoothViewHolder>() {
 
-        interface ItemClickListener {
-            fun onItemClick(position: Int)
-        }
+    private var listBooth: List<DataItem> = emptyList()
 
-    class ItemAdapter(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    interface ItemClickListener {
+        fun onItemClick(position: Int)
+    }
 
-        private val imageBooth: ImageView = itemView.findViewById(R.id.iv_booth_image)
-        private val titleBooth: TextView = itemView.findViewById(R.id.tv_booth_title)
-        private val foodsBooth: TextView = itemView.findViewById(R.id.tv_booth_foods)
-        private val locationBooth: TextView = itemView.findViewById(R.id.tv_booth_location)
-        private val timeBooth: TextView = itemView.findViewById(R.id.tv_booth_time)
+    @SuppressLint("NotifyDataSetChanged")
+    fun setData(newList: List<DataItem>) {
+        listBooth = newList
+        notifyDataSetChanged()
+    }
 
-        fun bind(item: ListItemBooth) {
-            imageBooth.setImageResource(item.imageResId)
-            titleBooth.text = item.title
-            foodsBooth.text = item.foods
-            locationBooth.text = item.location
-            timeBooth.text = item.time
+    class BoothViewHolder(private val binding: ListItemBoothBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+
+//        private val imageBooth: ImageView = itemView.findViewById(R.id.iv_booth_image)
+//        private val titleBooth: TextView = itemView.findViewById(R.id.tv_booth_title)
+//        private val foodsBooth: TextView = itemView.findViewById(R.id.tv_booth_foods)
+//        private val locationBooth: TextView = itemView.findViewById(R.id.tv_booth_location)
+//        private val timeBooth: TextView = itemView.findViewById(R.id.tv_booth_time)
+
+        fun bind(context: Context, itemBooth: DataItem) {
+
+            binding.apply {
+                tvBoothTitle.text = itemBooth.name
+                tvBoothFoods.text = itemBooth.foodTotal.toString()
+                tvBoothLocation.text = itemBooth.address
+                tvBoothTime.text = itemBooth.timeOpen
+            }
         }
 
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemAdapter {
-        val view =
-            LayoutInflater.from(parent.context).inflate(R.layout.list_item_booth, parent, false)
-        return ItemAdapter(view)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BoothViewHolder {
+        val view = ListItemBoothBinding.inflate(
+            LayoutInflater.from(parent.context),
+            parent,
+            false
+        )
+        return BoothViewHolder(view)
     }
 
-    override fun getItemCount(): Int {
-        return listItem.size
-    }
+    override fun getItemCount() = listBooth.size
 
-    override fun onBindViewHolder(holder: ItemAdapter, position: Int) {
-        val item = listItem[position]
-        holder.bind(item)
-
-        holder.itemView.setOnClickListener {
-            itemClickListener.onItemClick(position)
-        }
+    override fun onBindViewHolder(holder: BoothViewHolder, position: Int) {
+        holder.bind(holder.itemView.context, listBooth[position])
     }
 
 }

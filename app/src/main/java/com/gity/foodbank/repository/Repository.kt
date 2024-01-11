@@ -2,6 +2,8 @@ package com.gity.foodbank.repository
 
 
 import android.util.Log
+import com.gity.foodbank.data.model.DataItem
+import com.gity.foodbank.data.model.ListBoothResponse
 import com.gity.foodbank.data.model.LoginResponse
 import com.gity.foodbank.data.model.LoginResponseDicoding
 import com.gity.foodbank.data.model.RegisterResponse
@@ -40,6 +42,10 @@ class Repository(private val apiService: Service) {
         } catch (e: Exception) {
             throw e
         }
+    }
+
+    suspend fun getListBooth(): Response<List<DataItem>> {
+        return apiService.getListBooth()
     }
 
 
