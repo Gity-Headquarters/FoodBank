@@ -1,29 +1,59 @@
 package com.gity.foodbank.ui.fragment.profile
 
-import androidx.lifecycle.ViewModelProvider
+import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.gity.foodbank.R
-import com.gity.foodbank.ui.fragment.home.HomeFragment
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import com.gity.foodbank.data.preferences.datastore.DataStore
+import com.gity.foodbank.data.preferences.datastore.dataStore
+import com.gity.foodbank.databinding.FragmentProfileBinding
+import com.gity.foodbank.ui.activity.session.SplashActivity
+import kotlinx.coroutines.launch
 
+@Suppress("DEPRECATION")
 class ProfileFragment : Fragment() {
 
     private lateinit var viewModel: ProfileViewModel
+    private lateinit var binding: FragmentProfileBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_profile, container, false)
+        binding = FragmentProfileBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(ProfileViewModel::class.java)
-        // TODO: Use the ViewModel
+        viewModel = ViewModelProvider(this)[ProfileViewModel::class.java]
+
+        binding.apply {
+            btnLogout.setOnClickListener {
+                lifecycleScope.launch {
+                    logout()
+                    requireActivity().supportFragmentManager.popBackStack(
+                        null,
+                        FragmentManager.POP_BACK_STACK_INCLUSIVE
+                    )
+                    requireActivity().finish()
+                    startActivity(Intent(requireActivity(), SplashActivity::class.java))
+                }
+            }
+        }
+
+
+    }
+
+    private suspend fun logout() {
+        val dataStore = DataStore.getInstance(requireActivity().dataStore)
+        dataStore.clearToken()
     }
 
     companion object {

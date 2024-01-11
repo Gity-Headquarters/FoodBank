@@ -9,11 +9,12 @@ import retrofit2.Response
 class RegisterViewModel(private val repository: Repository) : ViewModel() {
 
     suspend fun register(
-        name: String,
+        nik: String,
+        username: String,
         email: String,
         password: String,
     ): Response<RegisterResponse> {
-        return repository.registerAuth(name, email, password)
+        return repository.registerAuth(nik, username, email, password)
     }
 
 }

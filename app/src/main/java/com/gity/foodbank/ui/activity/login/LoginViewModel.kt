@@ -10,7 +10,7 @@ import retrofit2.Response
 
 class LoginViewModel(private val repository: Repository) : ViewModel() {
 
-    suspend fun login(email: String, password: String): Response<LoginResponseDicoding> {
+    suspend fun login(email: String, password: String): Response<LoginResponse> {
         return repository.loginAuth(email, password)
     }
 

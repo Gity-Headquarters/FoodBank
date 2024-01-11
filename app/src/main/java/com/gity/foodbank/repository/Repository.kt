@@ -1,6 +1,7 @@
 package com.gity.foodbank.repository
 
 
+import android.util.Log
 import com.gity.foodbank.data.model.LoginResponse
 import com.gity.foodbank.data.model.LoginResponseDicoding
 import com.gity.foodbank.data.model.RegisterResponse
@@ -10,13 +11,13 @@ import retrofit2.Response
 
 class Repository(private val apiService: Service) {
 
-    suspend fun loginAuth(email: String, password: String): Response<LoginResponseDicoding> {
+    suspend fun loginAuth(email: String, password: String): Response<LoginResponse> {
         return try {
             val response = apiService.postLogin(email, password)
             if (response.isSuccessful) {
                 Response.success(response.body())
             } else {
-                throw Exception(response.message())
+                throw Exception(response.code().toString())
             }
         } catch (e: Exception) {
             throw e
@@ -24,12 +25,13 @@ class Repository(private val apiService: Service) {
     }
 
     suspend fun registerAuth(
-        name: String,
+        nik: String,
+        username: String,
         email: String,
         password: String,
     ): Response<RegisterResponse> {
         return try {
-            val response = apiService.postRegister(name, email, password)
+            val response = apiService.postRegister(nik, username, email, password)
             if (response.isSuccessful) {
                 Response.success(response.body())
             } else {

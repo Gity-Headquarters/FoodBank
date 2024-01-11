@@ -8,10 +8,10 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="PLACEHOLDER" />
-                  <option name="mobileSdkAppId" value="" />
-                  <option name="projectId" value="" />
-                  <option name="projectNumber" value="" />
+                  <option name="appId" value="com.gity.foodbank" />
+                  <option name="mobileSdkAppId" value="1:1055117605070:android:de837c6cf503201a0bf89f" />
+                  <option name="projectId" value="food-bank-gity-headquarters" />
+                  <option name="projectNumber" value="1055117605070" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />

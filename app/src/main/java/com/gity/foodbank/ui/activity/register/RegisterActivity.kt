@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -109,13 +110,13 @@ class RegisterActivity : AppCompatActivity() {
                     )
                 }
 
-//                edtNik.isEmpty() -> {
-//                    Common.showToast(context, resources.getString(R.string.empty_all))
-//                }
-//
-//                edtNik.length <= 15 -> {
-//                    Common.showToast(context, resources.getString(R.string.nik_length_error))
-//                }
+                edtNik.isEmpty() -> {
+                    Common.showToast(context, resources.getString(R.string.empty_all))
+                }
+
+                edtNik.length <= 15 -> {
+                    Common.showToast(context, resources.getString(R.string.nik_length_error))
+                }
 
                 edtFullname.isEmpty() -> {
                     Common.showToast(context, resources.getString(R.string.empty_all))
@@ -136,7 +137,9 @@ class RegisterActivity : AppCompatActivity() {
                     lifecycleScope.launch {
                         try {
                             showLoading(true)
-                            viewModel.register(edtFullname, edtEmail, edtPassword)
+                            val response = viewModel.register(edtNik, edtFullname, edtEmail, edtPassword)
+                            val code = response.code()
+                            Log.d("Code Status", "Code $code")
                             onSuccessfulRegister()
                             startActivity(Intent(context, LoginActivity::class.java))
                             finish()

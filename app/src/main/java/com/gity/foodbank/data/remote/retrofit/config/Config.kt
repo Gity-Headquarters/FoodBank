@@ -11,8 +11,8 @@ class Config {
     companion object {
 
         const val BASE_URL_DICODING = "https://story-api.dicoding.dev/v1/"
-        const val BASE_URL_FOODBANK = "https://61e7-103-105-34-73.ngrok-free.app/api/v1/auth/"
-        const val BASE_URL_FOODBANK2 = "https://6de9-103-105-33-73.ngrok-free.app/api/v1/auth/"
+        const val BASE_URL_FOODBANKLOCAL = "https://446f-125-164-22-252.ngrok-free.app/auth/"
+        const val BASE_URL_FOODBANKONLINE = "https://food-bank-410807.et.r.appspot.com/"
         const val BASE_URL_FOODBANKTANAHKU = "https://6d2c-103-105-34-73.ngrok-free.app/auth/"
 
         fun getApiService(): Service {
@@ -31,7 +31,7 @@ class Config {
                 .addInterceptor(authInterceptor)
                 .build()
             val retrofit = Retrofit.Builder()
-                .baseUrl(BASE_URL_DICODING)
+                .baseUrl(BASE_URL_FOODBANKONLINE)
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client)
                 .build()

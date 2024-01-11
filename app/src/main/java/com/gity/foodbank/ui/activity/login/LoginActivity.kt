@@ -89,7 +89,7 @@ class LoginActivity : AppCompatActivity() {
                         try {
                             showLoading(true)
                             val response = viewModel.login(edtEmail, edtPassword)
-                            val token = response.body()?.loginResult?.token
+                            val token = response.body()?.token
                             lifecycleScope.launch {
                                 if (token != null) {
                                     saveToken(token)

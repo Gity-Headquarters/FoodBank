@@ -16,16 +16,17 @@ import retrofit2.http.POST
 interface Service {
 
     @FormUrlEncoded
-    @POST("login")
+    @POST("auth/login")
     suspend fun postLogin(
         @Field("email") email: String,
         @Field("password") password: String
-    ): Response<LoginResponseDicoding>
+    ): Response<LoginResponse>
 
     @FormUrlEncoded
-    @POST("register")
+    @POST("auth/register")
     suspend fun postRegister(
-        @Field("name") name: String,
+        @Field("nik") nik: String,
+        @Field("username") name: String,
         @Field("email") email: String,
         @Field("password") password: String
     ): Response<RegisterResponse>
