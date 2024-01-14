@@ -14,7 +14,7 @@ import com.gity.foodbank.di.Injection
 import com.gity.foodbank.factory.ViewModelFactory
 import com.gity.foodbank.utils.Common
 
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(), BoothAdapter.ItemClickListener {
 
     private lateinit var viewModel: HomeViewModel
     private lateinit var binding: FragmentHomeBinding
@@ -36,7 +36,8 @@ class HomeFragment : Fragment() {
         viewModel = ViewModelProvider(this, viewModelFactory)[HomeViewModel::class.java]
 
 
-        adapter = BoothAdapter(emptyList()) //  Inisiasi dengan emptyList atau List Kosong dulu
+        adapter =
+            BoothAdapter(emptyList(), this) //  Inisiasi dengan emptyList atau List Kosong dulu
         val recyclerView: RecyclerView = binding.rvListItemBooth
         recyclerView.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
@@ -46,7 +47,7 @@ class HomeFragment : Fragment() {
 
         viewModel.booths.observe(viewLifecycleOwner) { booths ->
             booths?.let {
-                adapter = BoothAdapter(it)
+                adapter = BoothAdapter(it, this)
                 recyclerView.adapter = adapter
             }
         }
@@ -78,6 +79,12 @@ class HomeFragment : Fragment() {
             fragment.arguments = args
             return fragment
         }
+    }
+
+    override fun onItemClick(position: Int) {
+        val booth = adapter.getItemId(position)
+        Common.showToast(requireContext(), "Item $booth, di Klik")
+
     }
 
 }
