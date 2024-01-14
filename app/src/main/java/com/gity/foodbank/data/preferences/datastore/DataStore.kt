@@ -15,6 +15,11 @@ val Context.dataStore: DataStore<Preferences> by preferencesDataStore(
 class DataStore(private val dataStore: DataStore<Preferences>) {
 
     private val TOKEN = stringPreferencesKey("token")
+    private val EMAIL = stringPreferencesKey("email")
+    private val PROFILEPICTURE = stringPreferencesKey("picture")
+    private val USERNAME = stringPreferencesKey("username")
+    private val GUIDUSER = stringPreferencesKey("guid_user")
+
 
     suspend fun saveToken(token: String) {
         dataStore.edit { preferences ->
@@ -27,9 +32,58 @@ class DataStore(private val dataStore: DataStore<Preferences>) {
         return preferences[TOKEN] ?: ""
     }
 
+    suspend fun saveEmail(email: String) {
+        dataStore.edit { preferences ->
+            preferences[EMAIL] = email
+        }
+    }
+
+    suspend fun saveProfilePicture(profilePicture: String) {
+        dataStore.edit { preferences ->
+            preferences[PROFILEPICTURE] = profilePicture
+        }
+    }
+
+    suspend fun saveUsername(username: String) {
+        dataStore.edit { preferences ->
+            preferences[USERNAME] = username
+        }
+    }
+
+    suspend fun saveGuidUser(guid: String) {
+        dataStore.edit { preferences ->
+            preferences[GUIDUSER] = guid
+        }
+    }
+
+    suspend fun getEmail(): String {
+        val preferences = dataStore.data.first()
+        return preferences[EMAIL] ?: ""
+    }
+
+    suspend fun getProfilePicture(): String {
+        val preferences = dataStore.data.first()
+        return preferences[PROFILEPICTURE] ?: ""
+    }
+
+    suspend fun getUsername(): String {
+        val preferences = dataStore.data.first()
+        return preferences[USERNAME] ?: ""
+    }
+
+    suspend fun getGuidUser(): String {
+        val preferences = dataStore.data.first()
+        return preferences[GUIDUSER] ?: ""
+    }
+
+
     suspend fun clearToken() {
         dataStore.edit { preferences ->
             preferences.remove(TOKEN)
+            preferences.remove(EMAIL)
+            preferences.remove(PROFILEPICTURE)
+            preferences.remove(USERNAME)
+            preferences.remove(GUIDUSER)
         }
     }
 

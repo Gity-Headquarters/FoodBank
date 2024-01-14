@@ -11,7 +11,6 @@ import com.gity.foodbank.data.preferences.datastore.dataStore
 import com.gity.foodbank.databinding.ActivityLoginBinding
 import com.gity.foodbank.di.Injection
 import com.gity.foodbank.factory.ViewModelFactory
-import com.gity.foodbank.ui.activity.detail.DetailBoothActivity
 import com.gity.foodbank.ui.activity.main.MainActivity
 import com.gity.foodbank.ui.activity.register.RegisterActivity
 import com.gity.foodbank.utils.Common
@@ -92,20 +91,24 @@ class LoginActivity : AppCompatActivity() {
                             val response = viewModel.login(edtEmail, edtPassword)
                             val token = response.body()?.token
 
-                            val userGuid = response.body()?.data?.guid
-                            userGuid?.let { Common.showToast(context, it) }
+                            val userEmail = response.body()?.data?.email
+                            val userProfilePicture = response.body()?.data?.imageProfile
+                            val userName = response.body()?.data?.username
+                            val guid = response.body()?.data?.guid
 
 
                             context.startActivity(intent)
                             lifecycleScope.launch {
-                                if (token != null) {
+                                if (token != null && userEmail != null && userProfilePicture != null && userName != null && guid != null) {
                                     saveToken(token)
+                                    saveDataUser(userEmail, userProfilePicture, userName, guid)
                                 } else {
                                     Common.showToast(context, "Token is Null")
                                 }
                             }
                             onSuccessfulLogin()
                             showLoading(false)
+                            finish()
                         } catch (e: Exception) {
                             showLoading(false)
                             onFailedLogin()
@@ -133,4 +136,13 @@ class LoginActivity : AppCompatActivity() {
         val dataStore = DataStore.getInstance(context.dataStore)
         dataStore.saveToken(token)
     }
+
+    private suspend fun saveDataUser(email: String, profilePicture: String, username: String, guid: String) {
+        val dataStore = DataStore.getInstance(context.dataStore)
+        dataStore.saveEmail(email)
+        dataStore.saveProfilePicture(profilePicture)
+        dataStore.saveUsername(username)
+        dataStore.saveGuidUser(guid)
+    }
+
 }

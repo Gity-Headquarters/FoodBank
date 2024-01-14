@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
@@ -17,7 +18,6 @@ import com.gity.foodbank.databinding.FragmentProfileBinding
 import com.gity.foodbank.ui.activity.session.SplashActivity
 import kotlinx.coroutines.launch
 
-@Suppress("DEPRECATION")
 class ProfileFragment : Fragment() {
 
     private lateinit var viewModel: ProfileViewModel
@@ -26,7 +26,7 @@ class ProfileFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentProfileBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -49,8 +49,15 @@ class ProfileFragment : Fragment() {
                 }
             }
 
-            
-
+            lifecycleScope.launch {
+                tvEmail.text = getEmail()
+                tvUsername.text = getUsername()
+                Glide.with(requireContext())
+                    .load(getProfilePicture().toUri())
+                    .transition(DrawableTransitionOptions.withCrossFade())
+                    .centerCrop()
+                    .into(ivUserProfile)
+            }
 
 
         }
@@ -60,6 +67,22 @@ class ProfileFragment : Fragment() {
         val dataStore = DataStore.getInstance(requireActivity().dataStore)
         dataStore.clearToken()
     }
+
+    private suspend fun getEmail(): String {
+        val dataStore = DataStore.getInstance(requireActivity().dataStore)
+        return dataStore.getEmail()
+    }
+
+    private suspend fun getProfilePicture(): String {
+        val dataStore = DataStore.getInstance(requireActivity().dataStore)
+        return dataStore.getProfilePicture()
+    }
+
+    private suspend fun getUsername(): String {
+        val dataStore = DataStore.getInstance(requireActivity().dataStore)
+        return dataStore.getUsername()
+    }
+
 
 
     companion object {

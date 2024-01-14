@@ -38,7 +38,7 @@
                     android:orientation="vertical">
 
 
-                    <com.makeramen.roundedimageview.RoundedImageView
+                    <ImageView
                         android:id="@+id/iv_user_profile"
                         android:layout_width="76dp"
                         android:layout_height="76dp"

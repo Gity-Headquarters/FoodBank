@@ -362,14 +362,14 @@
 
     <!-- Button Donate -->
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/materialButton"
+        android:id="@+id/btn_take_food"
         android:layout_width="0dp"
         android:layout_height="54dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="42dp"
         android:fontFamily="@font/inter_bold"
-        android:text="Donate"
+        android:text="Take a Food"
         android:textSize="14sp"
         app:cornerRadius="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
