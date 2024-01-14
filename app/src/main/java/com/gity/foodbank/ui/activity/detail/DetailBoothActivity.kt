@@ -1,11 +1,11 @@
 package com.gity.foodbank.ui.activity.detail
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.gity.foodbank.R
 import com.gity.foodbank.databinding.ActivityDetailBoothBinding
 import com.gity.foodbank.di.Injection
 import com.gity.foodbank.factory.ViewModelFactory
@@ -24,29 +24,48 @@ class DetailBoothActivity : AppCompatActivity() {
         val viewModelFactory = ViewModelFactory(injection)
         viewModel = ViewModelProvider(this, viewModelFactory)[DetailBoothViewModel::class.java]
 
-        viewModel.boothDetail.observe(this@DetailBoothActivity) { detailData ->
+        val guid = getDetailId()
 
+        if (guid != null) {
+            viewModel.getBoothDetail(guid)
+        }
+
+        viewModel.boothDetail.observe(this@DetailBoothActivity) { detailData ->
             if (detailData != null) {
                 binding.apply {
                     Glide.with(this@DetailBoothActivity)
-                        .load(detailData.image)
+
+                        .load(detailData.data?.image)
                         .transition(DrawableTransitionOptions.withCrossFade())
                         .centerCrop()
                         .into(ivBoothImage)
 
-                    tvBoothTitle.text = detailData.name
-                    tvBoothStatus.text = detailData.status
-                    tvBoothLocation.text = detailData.address
-                    tvBoothFoods.text = detailData.foodTotal.toString()
-                    tvBoothTimeOpen.text = detailData.timeOpen
-                    tvBoothTimeClose.text = detailData.timeClose
-                    tvBoothDescription.text = detailData.description
+                    tvBoothTitle.text = detailData.data?.name
+
+                    val statusBooth = detailData.data?.status
+
+                    if (statusBooth == "open") {
+                        tvBoothStatus.text = "Open"
+                        tvBoothStatus.setTextColor(getColor(R.color.dark_green))
+                        lineStatusColor.setImageDrawable(getDrawable(R.drawable.ic_green_line))
+
+                    } else if (statusBooth == "close") {
+                        tvBoothStatus.text = "Close"
+                        tvBoothStatus.setTextColor(getColor(R.color.dark_red))
+                        lineStatusColor.setImageDrawable(getDrawable(R.drawable.ic_red_line))
+                    }
+
+                    tvBoothLocation.text = detailData.data?.address
+                    tvBoothFoods.text = detailData.data?.foodTotal.toString()
+                    tvBoothTimeOpen.text = detailData.data?.timeOpen
+                    tvBoothTimeClose.text = detailData.data?.timeClose
+                    tvBoothDescription.text = detailData.data?.description
                 }
             }
 
         }
 
-            getDetailId()
+        getDetailId()
         Common.showToast(this, "GUID : ${getDetailId()}")
     }
 

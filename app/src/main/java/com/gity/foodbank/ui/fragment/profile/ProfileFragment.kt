@@ -9,6 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.gity.foodbank.data.preferences.datastore.DataStore
 import com.gity.foodbank.data.preferences.datastore.dataStore
 import com.gity.foodbank.databinding.FragmentProfileBinding
@@ -29,9 +31,9 @@ class ProfileFragment : Fragment() {
         return binding.root
     }
 
-    @Deprecated("Deprecated in Java")
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
         viewModel = ViewModelProvider(this)[ProfileViewModel::class.java]
 
         binding.apply {
@@ -46,15 +48,24 @@ class ProfileFragment : Fragment() {
                     startActivity(Intent(requireActivity(), SplashActivity::class.java))
                 }
             }
+
+            
+
+
+//            Glide.with(requireContext())
+//                .load(detailData.image)
+//                .transition(DrawableTransitionOptions.withCrossFade())
+//                .centerCrop()
+//                .into(ivUserProfile)
+
         }
-
-
     }
 
     private suspend fun logout() {
         val dataStore = DataStore.getInstance(requireActivity().dataStore)
         dataStore.clearToken()
     }
+
 
     companion object {
         fun newInstance(): ProfileFragment {

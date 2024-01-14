@@ -11,6 +11,7 @@ import com.gity.foodbank.data.preferences.datastore.dataStore
 import com.gity.foodbank.databinding.ActivityLoginBinding
 import com.gity.foodbank.di.Injection
 import com.gity.foodbank.factory.ViewModelFactory
+import com.gity.foodbank.ui.activity.detail.DetailBoothActivity
 import com.gity.foodbank.ui.activity.main.MainActivity
 import com.gity.foodbank.ui.activity.register.RegisterActivity
 import com.gity.foodbank.utils.Common
@@ -90,6 +91,13 @@ class LoginActivity : AppCompatActivity() {
                             showLoading(true)
                             val response = viewModel.login(edtEmail, edtPassword)
                             val token = response.body()?.token
+
+                            val userProfile = response.body()?.data?.imageProfile
+                            val intent = Intent(context, DetailBoothActivity::class.java)
+                            intent.putExtra("user_photo_profile", userProfile)
+
+
+                            context.startActivity(intent)
                             lifecycleScope.launch {
                                 if (token != null) {
                                     saveToken(token)

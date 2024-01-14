@@ -131,9 +131,10 @@
                         android:orientation="horizontal">
 
                         <ImageView
+                            android:id="@+id/line_status_color"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:src="@drawable/ic_green_line" />
+                            tools:src="@drawable/ic_green_line" />
 
                         <TextView
                             android:id="@+id/tv_booth_status"

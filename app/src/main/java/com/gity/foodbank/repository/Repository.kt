@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.gity.foodbank.data.model.DataItem
+import com.gity.foodbank.data.model.DetailBoothResponse
 import com.gity.foodbank.data.model.LoginResponse
 import com.gity.foodbank.data.model.RegisterResponse
 import com.gity.foodbank.data.remote.retrofit.service.Service
@@ -63,16 +64,10 @@ class Repository(private val apiService: Service) {
     }
 
 //    Get Detail Booths by Id
-    private val _boothDetail = MutableLiveData<DataItem>()
-    val boothDetail: LiveData<DataItem> get() = _boothDetail
-    suspend fun getBoothDetail(guid: String) {
-        try {
-            val response = apiService.getBoothDetail(guid)
-            _boothDetail.value = response
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
+    suspend fun getBoothDetail(guid: String): DetailBoothResponse {
+        return apiService.getBoothDetail(guid)
     }
+
 
 
 

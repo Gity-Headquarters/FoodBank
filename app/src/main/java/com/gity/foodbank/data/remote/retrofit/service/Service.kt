@@ -1,7 +1,7 @@
 package com.gity.foodbank.data.remote.retrofit.service
 
 import com.gity.foodbank.data.model.BoothResponse
-import com.gity.foodbank.data.model.DataItem
+import com.gity.foodbank.data.model.DetailBoothResponse
 import com.gity.foodbank.data.model.LoginResponse
 import com.gity.foodbank.data.model.RegisterResponse
 import retrofit2.Response
@@ -35,6 +35,6 @@ interface Service {
     @GET("booth/{boothId}")
     suspend fun getBoothDetail(
         @Path("boothId") boothId: String
-    ): DataItem
+    ): DetailBoothResponse
 
 }
