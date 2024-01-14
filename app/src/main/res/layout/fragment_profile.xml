@@ -47,7 +47,7 @@
                         app:riv_corner_radius="60dip" />
 
                     <TextView
-                        android:id="@+id/textView7"
+                        android:id="@+id/tv_username"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="4dp"
@@ -57,11 +57,11 @@
                         android:textSize="16sp" />
 
                     <TextView
-                        android:id="@+id/tv_user_email"
+                        android:id="@+id/tv_email"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/inter_reguler"
-                        android:text="yokijati@gmail.com"
+                        tools:text="yokijati@gmail.com"
                         android:textColor="@color/black"
                         android:textSize="14sp" />
 

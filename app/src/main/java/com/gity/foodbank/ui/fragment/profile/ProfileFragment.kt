@@ -52,11 +52,6 @@ class ProfileFragment : Fragment() {
             
 
 
-//            Glide.with(requireContext())
-//                .load(detailData.image)
-//                .transition(DrawableTransitionOptions.withCrossFade())
-//                .centerCrop()
-//                .into(ivUserProfile)
 
         }
     }

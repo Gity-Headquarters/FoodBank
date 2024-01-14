@@ -25,10 +25,8 @@ class DetailBoothActivity : AppCompatActivity() {
         val viewModelFactory = ViewModelFactory(injection)
         viewModel = ViewModelProvider(this, viewModelFactory)[DetailBoothViewModel::class.java]
 
-        val guid = getDetailId()
-
-        if (guid != null) {
-            viewModel.getBoothDetail(guid)
+        binding.btnBack.setOnClickListener {
+            finish()
         }
 
         viewModel.boothDetail.observe(this@DetailBoothActivity) { detailData ->
@@ -75,7 +73,6 @@ class DetailBoothActivity : AppCompatActivity() {
         }
 
         getDetailId()
-        Common.showToast(this, "GUID : ${getDetailId()}")
     }
 
     private fun getDetailId(): String? {

@@ -92,9 +92,8 @@ class LoginActivity : AppCompatActivity() {
                             val response = viewModel.login(edtEmail, edtPassword)
                             val token = response.body()?.token
 
-                            val userProfile = response.body()?.data?.imageProfile
-                            val intent = Intent(context, DetailBoothActivity::class.java)
-                            intent.putExtra("user_photo_profile", userProfile)
+                            val userGuid = response.body()?.data?.guid
+                            userGuid?.let { Common.showToast(context, it) }
 
 
                             context.startActivity(intent)
