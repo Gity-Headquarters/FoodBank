@@ -2,6 +2,7 @@ package com.gity.foodbank.ui.activity.detail
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
@@ -45,14 +46,22 @@ class DetailBoothActivity : AppCompatActivity() {
                     val statusBooth = detailData.data?.status
 
                     if (statusBooth == "open") {
-                        tvBoothStatus.text = "Open"
+                        tvBoothStatus.text = getString(R.string.openBooth)
                         tvBoothStatus.setTextColor(getColor(R.color.dark_green))
-                        lineStatusColor.setImageDrawable(getDrawable(R.drawable.ic_green_line))
+                        val drawableImageGreenLine = ContextCompat.getDrawable(
+                            this@DetailBoothActivity,
+                            R.drawable.ic_green_line
+                        )
+                        lineStatusColor.setImageDrawable(drawableImageGreenLine)
 
                     } else if (statusBooth == "close") {
-                        tvBoothStatus.text = "Close"
+                        tvBoothStatus.text = getString(R.string.closeBooth)
                         tvBoothStatus.setTextColor(getColor(R.color.dark_red))
-                        lineStatusColor.setImageDrawable(getDrawable(R.drawable.ic_red_line))
+                        val drawableImageRedLine = ContextCompat.getDrawable(
+                            this@DetailBoothActivity,
+                            R.drawable.ic_red_line
+                        )
+                        lineStatusColor.setImageDrawable(drawableImageRedLine)
                     }
 
                     tvBoothLocation.text = detailData.data?.address

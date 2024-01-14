@@ -89,4 +89,8 @@
 
     </string-array>
 
+    <!-- Status Booth -->
+    <string name="openBooth">Open</string>
+    <string name="closeBooth">Close</string>
+
 </resources>
