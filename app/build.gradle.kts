@@ -105,6 +105,10 @@ dependencies {
     val roundedImageVersion = "2.3.0"
     implementation("com.makeramen:roundedimageview:$roundedImageVersion")
 
+//    Paging 3
+    val pagingVersion = "3.1.1"
+    implementation("androidx.paging:paging-runtime-ktx:$pagingVersion")
+
 
 
 

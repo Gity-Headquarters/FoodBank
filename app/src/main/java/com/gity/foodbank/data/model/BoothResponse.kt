@@ -5,15 +5,15 @@ import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 
 @Parcelize
-data class ListBoothResponse(
+data class BoothResponse(
 
-	@field:SerializedName("code")
+    @field:SerializedName("code")
 	val code: Int? = null,
 
-	@field:SerializedName("data")
-	val data: List<DataItem?>? = null,
+    @field:SerializedName("data")
+	val data: List<DataItem>,
 
-	@field:SerializedName("status")
+    @field:SerializedName("status")
 	val status: String? = null
 ) : Parcelable
 

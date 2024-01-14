@@ -2,12 +2,11 @@ package com.gity.foodbank.repository
 
 
 import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.gity.foodbank.data.model.DataItem
-import com.gity.foodbank.data.model.ListBoothResponse
 import com.gity.foodbank.data.model.LoginResponse
-import com.gity.foodbank.data.model.LoginResponseDicoding
 import com.gity.foodbank.data.model.RegisterResponse
-import com.gity.foodbank.data.model.RegisterResponseDicoding
 import com.gity.foodbank.data.remote.retrofit.service.Service
 import retrofit2.Response
 
@@ -44,9 +43,38 @@ class Repository(private val apiService: Service) {
         }
     }
 
-    suspend fun getListBooth(): Response<List<DataItem>> {
-        return apiService.getListBooth()
+//    Get List of Booths
+    private val _booths = MutableLiveData<List<DataItem>>()
+    val booths: LiveData<List<DataItem>> get() = _booths
+    suspend fun getBooths() {
+        try {
+            val response = apiService.getBooths()
+            if (response.isSuccessful) {
+                _booths.postValue(response.body()?.data ?: emptyList())
+            } else {
+                val code = response.code().toString()
+                val message = response.message().toString()
+
+                Log.d("HTTP INFORMATION", "Code : $code\n Message : $message")
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
+
+//    Get Detail Booths by Id
+    private val _boothDetail = MutableLiveData<DataItem>()
+    val boothDetail: LiveData<DataItem> get() = _boothDetail
+    suspend fun getBoothDetail(id: Int) {
+        try {
+            val response = apiService.getBoothDetail(id)
+            _boothDetail.value = response
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+
 
 
 }

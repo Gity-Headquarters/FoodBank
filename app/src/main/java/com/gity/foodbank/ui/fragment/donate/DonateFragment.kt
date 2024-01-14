@@ -9,7 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.gity.foodbank.R
-import com.gity.foodbank.data.adapter.ListItemOtherDonationsAdapter
+import com.gity.foodbank.data.adapter.recycler.ListItemOtherDonationsAdapter
 import com.gity.foodbank.data.model.ListItemOtherDonations
 import com.gity.foodbank.databinding.FragmentDonateBinding
 import com.gity.foodbank.utils.Common

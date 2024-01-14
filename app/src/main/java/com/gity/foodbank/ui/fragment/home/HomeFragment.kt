@@ -8,18 +8,17 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.gity.foodbank.data.adapter.ListItemBoothAdapter
+import com.gity.foodbank.data.adapter.recycler.BoothAdapter
 import com.gity.foodbank.databinding.FragmentHomeBinding
 import com.gity.foodbank.di.Injection
 import com.gity.foodbank.factory.ViewModelFactory
 import com.gity.foodbank.utils.Common
 
-@Suppress("DEPRECATION")
 class HomeFragment : Fragment() {
 
     private lateinit var viewModel: HomeViewModel
     private lateinit var binding: FragmentHomeBinding
-    private lateinit var adapter: ListItemBoothAdapter
+    private lateinit var adapter: BoothAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,23 +28,28 @@ class HomeFragment : Fragment() {
         return binding.root
     }
 
-    @Deprecated("Deprecated in Java")
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this)[HomeViewModel::class.java]
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-        val injection = Injection.provideRepository()
-        val viewModelFactory = ViewModelFactory(injection)
+        val repository = Injection.provideRepository()
+        val viewModelFactory = ViewModelFactory(repository)
         viewModel = ViewModelProvider(this, viewModelFactory)[HomeViewModel::class.java]
 
 
+        adapter = BoothAdapter(emptyList()) //  Inisiasi dengan emptyList atau List Kosong dulu
         val recyclerView: RecyclerView = binding.rvListItemBooth
         recyclerView.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-        recyclerView.adapter = ListItemBoothAdapter()
+        recyclerView.adapter = adapter
 
-        viewModel.fetchPopularItems()
-        observerViewModel()
+        viewModel.getBooths()
+
+        viewModel.booths.observe(viewLifecycleOwner) { booths ->
+            booths?.let {
+                adapter = BoothAdapter(it)
+                recyclerView.adapter = adapter
+            }
+        }
 
         binding.apply {
             btnDonate.setOnClickListener {
@@ -65,12 +69,6 @@ class HomeFragment : Fragment() {
             }
         }
 
-    }
-
-    private fun observerViewModel() {
-        viewModel.listBoothItems.observe(viewLifecycleOwner) {
-            adapter.setData(it)
-        }
     }
 
     companion object {

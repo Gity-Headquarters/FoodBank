@@ -1,20 +1,15 @@
 package com.gity.foodbank.data.remote.retrofit.service
 
+import com.gity.foodbank.data.model.BoothResponse
 import com.gity.foodbank.data.model.DataItem
-import com.gity.foodbank.data.model.ListBoothResponse
 import com.gity.foodbank.data.model.LoginResponse
-import com.gity.foodbank.data.model.LoginResponseDicoding
-import com.gity.foodbank.data.model.LoginResponseDicodingResult
 import com.gity.foodbank.data.model.RegisterResponse
-import com.gity.foodbank.data.model.RegisterResponseDicoding
-import retrofit2.Call
 import retrofit2.Response
-import retrofit2.http.Body
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
-import retrofit2.http.Header
 import retrofit2.http.POST
+import retrofit2.http.Path
 
 interface Service {
 
@@ -35,6 +30,11 @@ interface Service {
     ): Response<RegisterResponse>
 
     @GET("booth")
-    suspend fun getListBooth(): Response<List<DataItem>>
+    suspend fun getBooths(): Response<BoothResponse>
+
+    @GET("booth/{id}")
+    suspend fun getBoothDetail(
+        @Path("id") id: Int
+    ): DataItem
 
 }

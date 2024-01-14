@@ -1,14 +1,12 @@
-package com.gity.foodbank.data.adapter
+package com.gity.foodbank.data.adapter.recycler
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView.OnItemClickListener
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.gity.foodbank.R
-import com.gity.foodbank.data.model.ListItemBooth
 import com.gity.foodbank.data.model.ListItemOtherDonations
 
 class ListItemOtherDonationsAdapter(private val listItem: List<ListItemOtherDonations>, private val itemClickListener: ItemClickListener) :

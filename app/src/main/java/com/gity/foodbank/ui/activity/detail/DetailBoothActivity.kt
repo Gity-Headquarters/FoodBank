@@ -21,5 +21,11 @@ class DetailBoothActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this, viewModelFactory)[DetailBoothViewModel::class.java]
 
 
+
+
+
+
+
+
     }
 }
