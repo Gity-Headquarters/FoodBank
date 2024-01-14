@@ -65,9 +65,9 @@ class Repository(private val apiService: Service) {
 //    Get Detail Booths by Id
     private val _boothDetail = MutableLiveData<DataItem>()
     val boothDetail: LiveData<DataItem> get() = _boothDetail
-    suspend fun getBoothDetail(id: Int) {
+    suspend fun getBoothDetail(guid: String) {
         try {
-            val response = apiService.getBoothDetail(id)
+            val response = apiService.getBoothDetail(guid)
             _boothDetail.value = response
         } catch (e: Exception) {
             e.printStackTrace()

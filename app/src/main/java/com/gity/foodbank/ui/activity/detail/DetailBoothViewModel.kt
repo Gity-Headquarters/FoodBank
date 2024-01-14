@@ -12,9 +12,9 @@ class DetailBoothViewModel(private val repository: Repository) : ViewModel() {
     private val _boothDetail = repository.boothDetail
     val boothDetail: LiveData<DataItem> get() = _boothDetail
 
-    fun getBoothDetail(id: Int) {
+    fun getBoothDetail(guid: String) {
         viewModelScope.launch {
-            repository.getBoothDetail(id)
+            repository.getBoothDetail(guid)
         }
     }
 

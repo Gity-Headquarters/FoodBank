@@ -32,9 +32,9 @@ interface Service {
     @GET("booth")
     suspend fun getBooths(): Response<BoothResponse>
 
-    @GET("booth/{id}")
+    @GET("booth/{boothId}")
     suspend fun getBoothDetail(
-        @Path("id") id: Int
+        @Path("boothId") boothId: String
     ): DataItem
 
 }
