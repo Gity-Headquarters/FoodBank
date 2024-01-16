@@ -14,7 +14,6 @@ import com.gity.foodbank.data.preferences.datastore.dataStore
 import com.gity.foodbank.databinding.ActivityDetailBoothBinding
 import com.gity.foodbank.di.Injection
 import com.gity.foodbank.factory.ViewModelFactory
-import com.gity.foodbank.utils.Common
 import kotlinx.coroutines.launch
 
 class DetailBoothActivity : AppCompatActivity() {
@@ -75,13 +74,12 @@ class DetailBoothActivity : AppCompatActivity() {
                     val boothGuid = detailData.data?.guid
 
                     lifecycleScope.launch {
-                        val boothGuidTranscation = boothGuid
                         val userGuidTransaction = getGuidUser()
 
                         binding.btnTakeFood.setOnClickListener {
                             lifecycleScope.launch {
-                                if (boothGuidTranscation != null) {
-                                    transactionUser(boothGuidTranscation, userGuidTransaction)
+                                if (boothGuid != null) {
+                                    transactionUser(boothGuid, userGuidTransaction)
                                 }
                             }
                         }
