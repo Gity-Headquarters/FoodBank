@@ -1,10 +1,10 @@
 package com.gity.foodbank.data.adapter.recycler
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.gity.foodbank.data.model.DataItem
@@ -15,10 +15,11 @@ class BoothAdapter : RecyclerView.Adapter<BoothAdapter.BoothViewHolder>() {
 
     private var listItemBooth: List<DataItem> = emptyList()
 
-    @SuppressLint("NotifyDataSetChanged")
     fun setData(newList: List<DataItem>) {
-        listItemBooth = newList
-        notifyDataSetChanged()
+        val diffCallback = BoothDiffUtilCallback(listItemBooth, newList)
+        val diffResult = DiffUtil.calculateDiff(diffCallback)
+        listItemBooth = newList.sortedByDescending { it.createdAt }
+        diffResult.dispatchUpdatesTo(this)
     }
 
     inner class BoothViewHolder(private val binding: ListItemBoothBinding) :
@@ -53,6 +54,27 @@ class BoothAdapter : RecyclerView.Adapter<BoothAdapter.BoothViewHolder>() {
 
     override fun onBindViewHolder(holder: BoothViewHolder, position: Int) {
         holder.bind(holder.itemView.context, listItemBooth[position])
+    }
+
+    class BoothDiffUtilCallback(
+        private val oldList: List<DataItem>,
+        private val newList: List<DataItem>
+    ) : DiffUtil.Callback() {
+        override fun getOldListSize(): Int {
+            return oldList.size
+        }
+
+        override fun getNewListSize(): Int {
+            return newList.size
+        }
+
+        override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+            return oldList[oldItemPosition].guid == newList[newItemPosition].guid
+        }
+
+        override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+            return oldList[oldItemPosition] == newList[newItemPosition]
+        }
     }
 
 }
