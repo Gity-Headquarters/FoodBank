@@ -1,6 +1,7 @@
 package com.gity.foodbank.ui.activity.detail
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
@@ -74,9 +75,15 @@ class DetailBoothActivity : AppCompatActivity() {
                     val boothGuid = detailData.data?.guid
 
                     lifecycleScope.launch {
-                        val guid = getGuidUser()
+                        val boothGuidTranscation = boothGuid
+                        val userGuidTransaction = getGuidUser()
+
                         binding.btnTakeFood.setOnClickListener {
-                            Common.showToast(this@DetailBoothActivity, "User GUID : $guid, Booth Guid : $boothGuid")
+                            lifecycleScope.launch {
+                                if (boothGuidTranscation != null) {
+                                    transactionUser(boothGuidTranscation, userGuidTransaction)
+                                }
+                            }
                         }
                     }
 
@@ -90,6 +97,25 @@ class DetailBoothActivity : AppCompatActivity() {
 
 
         getDetailId()
+    }
+
+    private suspend fun transactionUser(boothGuid: String, userGuid: String) {
+        val response = viewModel.transcation(boothGuid, userGuid)
+
+        if (response.isSuccessful) {
+            val code = response.body()?.code
+            val status = response.body()?.status
+            Log.i("Transaction Info", "Transaction Code : $code \nTransaction Status : $status")
+            val statusTransaction = response.body()?.dataTranscation?.transaction?.status
+
+
+
+            if (statusTransaction == "waiting" ) {
+                binding.tvBoothStatusRequestLayout.strokeColor = getColor(R.color.dark_green)
+                binding.tvBoothStatusRequest.text = statusTransaction
+            }
+        }
+
     }
 
     private suspend fun getGuidUser(): String {

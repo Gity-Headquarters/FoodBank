@@ -8,6 +8,7 @@ import com.gity.foodbank.data.model.DataItem
 import com.gity.foodbank.data.model.DetailBoothResponse
 import com.gity.foodbank.data.model.LoginResponse
 import com.gity.foodbank.data.model.RegisterResponse
+import com.gity.foodbank.data.model.TransactionResponse
 import com.gity.foodbank.data.remote.retrofit.service.Service
 import retrofit2.Response
 
@@ -34,6 +35,24 @@ class Repository(private val apiService: Service) {
     ): Response<RegisterResponse> {
         return try {
             val response = apiService.postRegister(nik, username, email, password)
+            if (response.isSuccessful) {
+                Response.success(response.body())
+            } else {
+                throw Exception(response.message())
+            }
+        } catch (e: Exception) {
+            throw e
+        }
+    }
+
+
+
+    suspend fun transaction(
+        boothId: String,
+        userid: String
+    ): Response<TransactionResponse> {
+        return try {
+            val response = apiService.postTransaction(boothId, userid)
             if (response.isSuccessful) {
                 Response.success(response.body())
             } else {

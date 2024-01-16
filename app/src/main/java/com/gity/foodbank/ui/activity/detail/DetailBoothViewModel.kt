@@ -5,8 +5,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.gity.foodbank.data.model.DetailBoothResponse
+import com.gity.foodbank.data.model.TransactionResponse
 import com.gity.foodbank.repository.Repository
 import kotlinx.coroutines.launch
+import retrofit2.Response
 
 class DetailBoothViewModel(private val repository: Repository) : ViewModel() {
 
@@ -21,6 +23,10 @@ class DetailBoothViewModel(private val repository: Repository) : ViewModel() {
                 throw e
             }
         }
+    }
+
+    suspend fun transcation(boothId: String, userId: String): Response<TransactionResponse>{
+        return repository.transaction(boothId, userId)
     }
 
 }

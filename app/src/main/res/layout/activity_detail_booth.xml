@@ -101,23 +101,26 @@
 
                     <!--  Status Request  -->
                     <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/tv_booth_status_request_layout"
                         android:layout_width="match_parent"
                         android:layout_height="62dp"
                         android:layout_marginStart="16dp"
                         android:layout_marginTop="32dp"
                         android:layout_marginEnd="16dp"
-                        android:layout_marginBottom="16dp"
                         android:backgroundTint="@color/white"
-                        app:cardCornerRadius="16dp"
-                        app:strokeWidth="2dp">
+                        app:strokeColor="@color/white"
+                        app:strokeWidth="2dp"
+                        android:layout_marginBottom="16dp"
+                        app:cardCornerRadius="16dp">
 
                         <TextView
                             android:id="@+id/tv_booth_status_request"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
+                            android:textColor="@color/black"
                             android:fontFamily="@font/inter_semibold"
-                            android:text="Waiting"
+                            android:text="Cmon Take Your Food"
                             android:textSize="16dp" />
 
                     </com.google.android.material.card.MaterialCardView>
